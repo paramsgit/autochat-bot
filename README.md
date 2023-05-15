@@ -22,7 +22,7 @@ Live : http://paramveersapp.pythonanywhere.com/
 
 2  Navigate to the project directory:
     
-    cd chat-bot-flask
+    cd autochat-bot
 
 3 Install the required dependencies using pip:
     
@@ -39,7 +39,7 @@ Live : http://paramveersapp.pythonanywhere.com/
 
     python app.py
 
-6 Open your web browser and visit http://127.0.0.1:5000/ to access the chat bot.
+6 Open your web browser and visit http://127.0.0.1:{port}/ to access the chat bot.
 
 
 
