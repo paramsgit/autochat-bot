@@ -2,6 +2,8 @@
 
 Introducing the Flask Chat Bot powered by the OpenAI API! This innovative chat bot combines the flexibility and ease of use of Flask with the power of the OpenAI API to deliver intelligent and interactive conversations. With natural language processing capabilities, the chat bot can understand user queries and provide relevant responses in real time. Whether it's customer support, information retrieval, or just casual conversation, our chat bot is ready to engage and assist users with its advanced AI capabilities. Get ready for an immersive and dynamic chat experience like never before!
 
+<img src="screenshot.png" alt="img_not_found">
+
 ## Prerequisites
 
 - Python 3.9 or higher
@@ -14,7 +16,7 @@ Introducing the Flask Chat Bot powered by the OpenAI API! This innovative chat b
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/chat-bot-flask.git
+   git clone https://github.com/paramsgit/autochat-bot
 
 2  Navigate to the project directory:
     
@@ -35,7 +37,7 @@ Introducing the Flask Chat Bot powered by the OpenAI API! This innovative chat b
 
     python app.py
 
-6 Open your web browser and visit http://localhost:5000 to access the chat bot.
+6 Open your web browser and visit http://127.0.0.1:5000/ to access the chat bot.
 
 
 
