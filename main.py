@@ -14,7 +14,7 @@ def index():
 
 @app.route('/data', methods=['POST'])
 def get_data():
-    
+    # return jsonify({"response":True,"message":"model_reply"})
     data = request.get_json()
     text=data.get('data')
     openai.api_key = API
