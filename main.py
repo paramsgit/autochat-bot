@@ -1,32 +1,23 @@
 from flask import Flask, render_template,jsonify,request
 from flask_cors import CORS
-import requests,openai
+import requests,openai,os
+from dotenv.main import load_dotenv
 app = Flask(__name__)
 CORS(app)
+
+load_dotenv()
+API = os.environ['API']
+
 @app.route('/')
-
-
-
-
-
-
-
-
 def index():
     return render_template('index.html')
 
 @app.route('/data', methods=['POST'])
 def get_data():
-    return jsonify({"response":True,"message":"model_reply"})
+    
     data = request.get_json()
     text=data.get('data')
-    
-
-    
-    API_ENDPOINT = 'https://api.openai.com/v1/chat/completions'
-    
-    API_KEY = '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'
-    openai.api_key = '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'
+    openai.api_key = API
     
     user_input = text
     print(user_input)
