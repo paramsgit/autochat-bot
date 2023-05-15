@@ -16,6 +16,7 @@
         .box{
             width: min(95%,800px);
             height: 100vh;
+            margin-top: 85px;
         }
         .bottom{
             position: fixed;
@@ -57,10 +58,27 @@
         #sendbtn:disabled{
             opacity: 0.6;
         }
+        nav{
+            position: fixed;
+            width: 100%;
+            padding: 10px;
+            box-shadow: 1px 1px 5px #80808057;
+        }
     </style>
 </head>
 <body>
    
+<nav class="bg-white border-gray-200 dark:bg-gray-900">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <a href="#" class="flex items-center">
+          <img src="https://seeklogo.com/images/O/open-ai-logo-8B9BFEDC26-seeklogo.com.png" class="h-8 mr-3" alt="Flowbite Logo" />
+          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Autochat Bot</span>
+      </a>
+     
+      
+    </div>
+  </nav>
+  
    <div class="container">
     <div class="box">
         <div class="upper" id="upperid">
