@@ -60,7 +60,7 @@
     </style>
 </head>
 <body>
-   <header></header>
+   
    <div class="container">
     <div class="box">
         <div class="upper" id="upperid">
@@ -127,6 +127,10 @@ const formsubmitted=async ()=>{
                 </div>
             </div>`
             sendbtn.disabled=true
+            scrollToBottom()
+            document.getElementById('userinput').value=""
+            document.getElementById('userinput').placeholder="Wait . . ."
+
             const response=await fetch("http://127.0.0.1:5000/data",{
           method:'POST',
           headers:{
@@ -137,18 +141,44 @@ const formsubmitted=async ()=>{
   
       });
       let json=await response.json();
-      sendbtn.disabled=false
+      
+      document.getElementById('userinput').placeholder="Your message..."
     //   console.log(json)
 
       if(json.response){
         let message=json.message
+        message=message.toString()
+        console.log(message[0])
         upperdiv.innerHTML=upperdiv.innerHTML+`<div class="message">
                 <div class="appmessagediv">
-                    <div class="appmessage">
-                       ${message} 
+                    <div class="appmessage" id="temp">
+                        
                     </div>
                 </div>
             </div>`
+            let temp=document.getElementById('temp')
+            let index=0
+            function displayNextLetter() {
+            if (index < message.length) {
+                temp.innerHTML =temp.innerHTML+ message[index];
+                index++;
+                setTimeout(displayNextLetter, 30);
+            }else{
+                temp.removeAttribute('id')
+            }
+            }
+            displayNextLetter()
+           
+        
+        
+
+        // upperdiv.innerHTML=upperdiv.innerHTML+`<div class="message">
+        //         <div class="appmessagediv">
+        //             <div class="appmessage">
+        //                ${message} 
+        //             </div>
+        //         </div>
+        //     </div>`
       }
     else{
         let message=json.message
@@ -164,6 +194,7 @@ const formsubmitted=async ()=>{
       }
 
       scrollToBottom()
+      sendbtn.disabled=false
 
 } 
    </script>
