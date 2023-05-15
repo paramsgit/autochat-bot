@@ -70,7 +70,7 @@
             </div>
           
             <div class="message">
-                <div class="appmessagediv">
+                <div class="appmessagediv" >
                     <div class="appmessage">
                         hello this is u
                     </div>
@@ -131,9 +131,31 @@ const formsubmitted=async ()=>{
   
       });
       let json=await response.json();
-      console.log(json)
+    //   console.log(json)
 
-      
+      if(json.response){
+        let message=json.message
+        document.getElementById('upperid').innerHTML=document.getElementById('upperid').innerHTML+`<div class="message">
+                <div class="appmessagediv">
+                    <div class="appmessage">
+                       ${message} 
+                    </div>
+                </div>
+            </div>`
+      }
+    else{
+        let message=json.message
+        document.getElementById('upperid').innerHTML=document.getElementById('upperid').innerHTML+
+        `<div class="message">
+                <div class="appmessagediv">
+                    <div class="appmessage"  style="border: 1px solid red;">
+                      ${message}
+
+                    </div>
+                </div>
+            </div>`
+      }
+
 } 
    </script>
 </body>

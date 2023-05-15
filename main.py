@@ -17,6 +17,7 @@ def index():
 
 @app.route('/data', methods=['POST'])
 def get_data():
+    return jsonify({"response":True,"message":"model_reply"})
     data = request.get_json()
     text=data.get('data')
     
@@ -25,10 +26,10 @@ def get_data():
     API_ENDPOINT = 'https://api.openai.com/v1/chat/completions'
     
     API_KEY = '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'
-    openai.api_key = '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'
+    openai.api_key = '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'
     
     user_input = text
-
+    print(user_input)
     try:
         response = openai.Completion.create(
         model="text-davinci-003",
