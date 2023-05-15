@@ -21,7 +21,8 @@
         .bottom{
             position: fixed;
             bottom: 0;
-            margin-bottom: 5%;
+            padding-bottom: 5%;
+            background-color: white;
             width: min(95%,800px);
         }
         .message{
@@ -52,16 +53,29 @@
             border-radius: 20px;
         }
         .upper{
-            max-height: calc(90% - 60px);
+            max-height: 100%;
+            padding-top: 40px;
+            padding-bottom: 150px;
             overflow: auto;
         }
+        .upper::-webkit-scrollbar { 
+    width: 0 !important 
+}
+
         #sendbtn:disabled{
             opacity: 0.6;
+        }
+        .downwarning{
+            display: flex;
+            justify-content: center;
+            margin-top: 5px;
+            font-size: 90%;
+            color: gray;
         }
         nav{
             position: fixed;
             width: 100%;
-            padding: 10px;
+            padding: 3px;
             box-shadow: 1px 1px 5px #80808057;
         }
     </style>
@@ -82,7 +96,8 @@
    <div class="container">
     <div class="box">
         <div class="upper" id="upperid">
-            <div class="message">
+            <span class="downwarning">Type your message in box below.</span>
+            <!-- <div class="message">
                 <div class="usermessagediv">
                         <div class="usermessage">
                             hello this is u
@@ -96,9 +111,10 @@
                         hello this is u
                     </div>
                 </div>
-            </div>
+            </div> -->
           
         </div>
+        
         <div class="bottom">
     
     <form id="userinputform">
@@ -112,7 +128,7 @@
             </button>
         </div>
     </form>
-    
+    <span class="downwarning">Remember Your Chat will not be saved, it will be lost upon reloading.</span>
         </div>
     </div>
    </div>
@@ -183,10 +199,11 @@ const formsubmitted=async ()=>{
                 setTimeout(displayNextLetter, 30);
             }else{
                 temp.removeAttribute('id')
+                sendbtn.disabled=false
             }
             }
             displayNextLetter()
-           
+            scrollToBottom()
         
         
 
@@ -212,7 +229,7 @@ const formsubmitted=async ()=>{
       }
 
       scrollToBottom()
-      sendbtn.disabled=false
+      
 
 } 
    </script>
