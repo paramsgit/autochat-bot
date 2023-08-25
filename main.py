@@ -51,7 +51,6 @@ def get_data():
     user_input = text
     print(user_input)
     try:
-        
         return jsonify({"response":True,"message":"model_reply"})
     except Exception as e:
         print(e)
