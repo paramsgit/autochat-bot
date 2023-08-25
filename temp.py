@@ -11,7 +11,7 @@ API = os.environ['API']
 
 def get_data():
     
-    # data = request.get_json()
+    
   
     text='''Give only json output as given below for user input, It should have all four keys topwear,bottomwear,footwear,accesories and also should have four sub keys=catagory,subcatagory,color,tags and it must be only json no other text, Example output for input 'Generate outfit for 20 year old young woman in mumbai for diwali' is={ "topwear": {"category": "T-Shirt","subcategory": "Oversized","color":"White","tags":["Party","Stylish"]},"bottomwear": {"category": "Jeans","subcategory": "Straight","color":"Black","tags":["Straight"]},"footwear": {"category": "Shoes","subcategory": "Big","color":"Blue","tags":["Comfortable"]},"accessories": [{"category": "Watch","subcategory": "Smartwatch","color":"Black","tags":["Water Resistant"]},{"category": "Belt","subcategory": "Leather Belt","color":"brown","tags":["stylish"]}]}'''
     openai.api_key = API
