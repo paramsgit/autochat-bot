@@ -2,9 +2,14 @@ from flask import Flask, render_template,jsonify,request
 from flask_cors import CORS
 import requests,openai,os
 from dotenv.main import load_dotenv
+from langchain.chains import ConversationalRetrievalChain, RetrievalQA
+from langchain.chat_models import ChatOpenAI
+from langchain.document_loaders import DirectoryLoader, TextLoader
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.indexes import VectorstoreIndexCreator
+from langchain.indexes.vectorstore import VectorStoreIndexWrapper
 from langchain.llms import OpenAI
-from langchain.chains import ConversationChain
-from langchain.memory import ConversationBufferMemory
+from langchain.vectorstores import Chroma
 app = Flask(__name__)
 CORS(app)
 
@@ -53,12 +58,13 @@ def get_data():
     
     user_input = text
     print(user_input)
+    chat_history = []
     try:
-        from langchain.llms import OpenAI
-        llm = OpenAI(openai_api_key = API, temperature=0.9)
-        llm_result = llm.generate(["Write a poem about hills", "Tell me a riddle about oranges"])
-
-
+    
+        chain = ConversationalRetrievalChain.from_llm(llm=ChatOpenAI(model="gpt-3.5-turbo"),retriever=index.vectorstore.as_retriever(search_kwargs={"k": 1}),)
+        chat_history = []
+        result = chain({"question": user_input, "chat_history": chat_history})
+        print(result['answer'],result)
         return jsonify({"response":True,"message":"model_reply"})
     except Exception as e:
         print(e)
