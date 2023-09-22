@@ -2,11 +2,14 @@ from flask import Flask, render_template,jsonify,request
 from flask_cors import CORS
 import requests,openai,os
 from dotenv.main import load_dotenv
+from langchain.llms import OpenAI
+from langchain.memory import ConversationBufferMemory
+from langchain.chains import ConversationChain
+from langchain.memory import ConversationSummaryBufferMemory
+llm = OpenAI()
+memory = ConversationSummaryBufferMemory(llm=llm, max_token_limit=100)
 app = Flask(__name__)
 CORS(app)
-
-load_dotenv()
-API = os.environ['API']
 
 @app.route('/')
 def index():
@@ -14,33 +17,20 @@ def index():
 
 @app.route('/data', methods=['POST'])
 def get_data():
-    
     data = request.get_json()
     text=data.get('data')
-    openai.api_key = API
-    
     user_input = text
     print(user_input)
     try:
-        response = openai.Completion.create(
-        model="text-davinci-003",
-        prompt=user_input,
-        temperature=0.7,
-        max_tokens=256,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0
-        )
-       
-        model_reply = response['choices'][0]['text']
-        print(response,model_reply)
-        return jsonify({"response":True,"message":model_reply})
+        print("Function started : ")
+        conversation = ConversationChain(llm=llm,memory=memory,verbose=True)
+        var1 = conversation.predict(input=user_input)
+        memory.save_context({"input": user_input}, {"output": var1})
+        return jsonify({"response":True,"message":var1})
     except Exception as e:
         print(e)
         error_message = f'Error: {str(e)}'
         return jsonify({"message":error_message,"response":False})
-
     
-
 if __name__ == '__main__':
     app.run()
