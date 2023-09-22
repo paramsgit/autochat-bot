@@ -20,13 +20,11 @@ def get_data():
     data = request.get_json()
     text=data.get('data')
     user_input = text
-    print(user_input)
     try:
-        print("Function started : ")
-        conversation = ConversationChain(llm=llm,memory=memory,verbose=True)
-        var1 = conversation.predict(input=user_input)
-        memory.save_context({"input": user_input}, {"output": var1})
-        return jsonify({"response":True,"message":var1})
+        conversation = ConversationChain(llm=llm,memory=memory)
+        output = conversation.predict(input=user_input)
+        memory.save_context({"input": user_input}, {"output": output})
+        return jsonify({"response":True,"message":output})
     except Exception as e:
         print(e)
         error_message = f'Error: {str(e)}'
